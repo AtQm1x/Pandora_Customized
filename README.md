@@ -45,4 +45,4 @@ Unlikely, for a few reasons:
 - AuthlibInjector support
 - Custom CF api key support
 - minor linux improvements probably
-- option to allow automodpack to manaeg mods
+- option to allow automodpack to manage mods
