@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 version="$1"
-if [ -z "$version" ] || [ "$version" = "latest" ]; then
+if [ -z "$version" ] || [ "$version" = "latest" ] || [[ ! "$version" =~ ^v?[0-9] ]]; then
     version=$(grep -m 1 'version =' Cargo.toml | cut -d '"' -f 2 || echo "5.3.1")
 fi
 
@@ -12,7 +12,7 @@ version=${version#v}
 export PANDORA_RELEASE_VERSION=$version
 
 if command -v apt-get &> /dev/null; then
-    sudo apt-get update --yes && sudo apt-get install --yes libssl-dev libdbus-1-dev libx11-xcb1 libxkbcommon-x11-dev pkg-config libseccomp-dev libfontconfig-dev libudev-dev || true
+    sudo apt-get update --yes && sudo apt-get install --yes libssl-dev libdbus-1-dev libx11-xcb1 libxkbcommon-x11-dev pkg-config libseccomp-dev libfontconfig-dev libudev-dev libfuse2 libfuse2t64 file || true
 fi
 cargo build --release --target x86_64-unknown-linux-gnu
 strip target/x86_64-unknown-linux-gnu/release/pandora_launcher

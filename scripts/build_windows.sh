@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 version="$1"
-if [ -z "$version" ] || [ "$version" = "latest" ]; then
+if [ -z "$version" ] || [ "$version" = "latest" ] || [[ ! "$version" =~ ^v?[0-9] ]]; then
     version=$(grep -m 1 'version =' Cargo.toml | cut -d '"' -f 2 || echo "5.3.1")
 fi
 
